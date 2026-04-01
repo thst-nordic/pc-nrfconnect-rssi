@@ -9,6 +9,15 @@ on:
             - synchronize
 
 jobs:
+    # Forks often lack Nordic PR labels; pass without calling the shared workflow.
+    check_label:
+        if: github.repository_owner != 'nordicsemi'
+        runs-on: ubuntu-latest
+        steps:
+            - name: Skip Nordic label rules outside nordicsemi org
+              run: echo "Label enforcement runs on nordicsemi org only."
+
     check_labels:
+        if: github.repository_owner == 'nordicsemi'
         uses: nordicsemi/pc-nrfconnect-shared/.github/workflows/labels.yml@main
         secrets: inherit
