@@ -1,4 +1,4 @@
-name: Check labels
+name: check_labels
 
 on:
     pull_request:
@@ -9,7 +9,7 @@ on:
             - synchronize
 
 jobs:
-    # Forks often lack Nordic PR labels; pass without calling the shared workflow.
+    # Forks lack Nordic PR labels; mirror required check name check_labels / check_label.
     check_label:
         if: github.repository_owner != 'nordicsemi'
         runs-on: ubuntu-latest
